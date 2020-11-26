@@ -1,0 +1,27 @@
+{% url 'public:index' as index_url %}
+{% url 'public:login' as login_url %}
+{% url 'public:contact' as contact_url %}
+{% url 'accounts:profile' as profile_url %}
+{% url 'accounts:logout' as logout_url %}
+
+<!-- <span><a href="{{ login_url }}">Log In</a></span>
+<span><a href="{{ index_url }}">Request Access</a></span> -->
+
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+      <span>{% if request.path == profile_url %}
+        <a class="navbar-brand" href="{{ logout_url }}">Log Out</a></span>
+        {% else %}
+        <a class="navbar-brand" href="{{ login_url }}">Log In</a></span>
+        {% endif %}
+      <span>{% if request.path == contact_url %}
+        <a class="btn btn-primary" href="{{ index_url }}">Home</a>
+        {% else %}
+        <a class="btn btn-primary" href="{{ contact_url }}">Request Access</a>
+        {% endif %}
+      </span>
+    </div>
+  </nav>
+
+
+

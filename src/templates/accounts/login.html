@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}GYUrop{% endblock %}
+
+{% block content %}
+
+<!-- <form method="post">
+  {% csrf_token %}
+  {{ form.as_p }} 
+  <button type="submit">Login</button>
+</form> -->
+
+<div class="lg"> 
+  {% url 'public:index' as index_url %}
+  <a href="{{ index_url }}"><img src="{% static 'img/lg-blue.png' %}" alt="GYU"></a>
+</div>
+<div class="login">
+  {% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+  <form id="login-form" method="post" action="{% url 'public:login' %}">
+    <div class="form">
+      {% csrf_token %}
+      <h2>Hello User</h2>
+      <div class="form-field">
+        <label for="login-mail">{{ form.username.label_tag }}</i></label>
+        {{ form.username }}
+        <svg>
+          <use href="#svg-check" />
+        </svg>
+      </div>
+      <div class="form-field">
+        <label for="login-password">{{ form.password.label_tag }}</i></label>
+        {{ form.password }}
+        <svg>
+          <use href="#svg-check" />
+        </svg>
+      </div>
+      
+      <button type="submit" class="button">
+        <input type="hidden" name="next" value="{{ next }}" />
+        <div class="arrow-wrapper">
+          <span class="arrow"></span>
+        </div>
+        <p class="button-text">SIGN IN</p>
+      </button>
+    </div>
+    <div class="finished">
+      <svg>
+        <use href="#svg-check" />
+      </svg>
+
+    </div>
+    
+  </form>
+  </div>
+ 
+  
+  <!-- //--- ## SVG SYMBOLS ############# -->
+  <svg style="display:none;">
+    <symbol id="svg-check" viewBox="0 0 130.2 130.2">
+      <polyline points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+    </symbol>
+  </svg>        
+
+  {% endblock %}
