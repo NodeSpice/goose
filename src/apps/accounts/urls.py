@@ -19,6 +19,7 @@ app_name="accounts"
 urlpatterns = [
     path('',views.index,name="home"),
     path("profile", views.ProfileView.as_view(), name="profile"),
+    
     # Django Auth
     
     path("logout", auth_views.LogoutView.as_view(), name="logout"),

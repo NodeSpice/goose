@@ -1,42 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'accounts/base.html' %}
+{% load static %}
 
-{% block title %}GYourney-Profile{% endblock %}
+{% block title %}GYUrop{% endblock %}
 
 {% block content %}
-<h1>
-    {{ user.get_full_name }}'s (@{{ user.username }})
 
-</h1>
-<div>
-    
-    {% with  profile=user.profile  %}
-        
-        {% if profile %}
-            <h2>
-                {{ profile.persona|default:"" }} 
-            </h2>
-            <div>
-                {{ profile.bio|default:"" }} 
-            </div>
-            <div>   
-                
-                {% with website=profile.website|default:""  %}
-                    <a href="{{ website }} ">{{ website }} </a>
-                {% endwith %}
-            </div>
-            <br>
-            <div>
-                Interest:
-                {% for interest in profile.interests.all  %}
-                    <span>
-                        {{ interest.name }}
-                        {% if not forloop.last %},{% endif %}
-                    </span>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-
-
-</div>
 {% endblock %}
